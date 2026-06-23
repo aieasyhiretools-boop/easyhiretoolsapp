@@ -4,6 +4,7 @@ import './Navbar.css';
 
 function Navbar({ isAuthenticated, user, onLogout }) {
   const navigate = useNavigate();
+  const logoUrl = `${process.env.PUBLIC_URL}/Easy_Hire_Tools_logo.png`;
 
   const handleLogout = () => {
     onLogout();
@@ -14,7 +15,7 @@ function Navbar({ isAuthenticated, user, onLogout }) {
     <nav className="navbar">
       <div className="container navbar-content">
         <Link to="/" className="navbar-logo">
-          <img src="/Easy_Hire_Tools_logo.png" alt="EasyHire Tools" className="logo-img" />
+          <img src={logoUrl} alt="EasyHire Tools" className="logo-img" />
         </Link>
         <div className="navbar-menu">
           <Link to="/jobs" className="nav-link">Jobs</Link>

@@ -3,11 +3,13 @@ import { Link } from 'react-router-dom';
 import './Home.css';
 
 function Home() {
+  const logoUrl = `${process.env.PUBLIC_URL}/Easy_Hire_Tools_logo.png`;
+
   return (
     <div className="home">
       <div className="container">
         <div className="hero">
-          <img src="/Easy_Hire_Tools_logo.png" alt="EasyHire Tools" className="hero-logo" />
+          <img src={logoUrl} alt="EasyHire Tools" className="hero-logo" />
           <h1>Welcome to EasyHire Tools</h1>
           <p>Connect employers with talented candidates and manage resumes effortlessly</p>
           <div className="hero-buttons">
