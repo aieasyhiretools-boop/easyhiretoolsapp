@@ -32,11 +32,27 @@ const connectDB = async () => {
   }
 };
 
+// JWT Authentication Middleware
+const jwt = require('jsonwebtoken');
+app.use((req, res, next) => {
+  const token = req.headers.authorization?.split(' ')[1];
+  if (token) {
+    try {
+      const decoded = jwt.verify(token, process.env.JWT_SECRET || 'secret');
+      req.user = decoded;
+    } catch (err) {
+      console.log('Token verification failed:', err.message);
+    }
+  }
+  next();
+});
+
 // Routes
 app.use('/api/auth', require('../backend/routes/auth'));
 app.use('/api/jobs', require('../backend/routes/jobs'));
 app.use('/api/resumes', require('../backend/routes/resumes'));
 app.use('/api/users', require('../backend/routes/users'));
+app.use('/api/admin', require('../backend/routes/admin'));
 
 // Health check
 app.get('/api/health', (req, res) => {

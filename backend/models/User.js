@@ -23,6 +23,10 @@ const userSchema = new mongoose.Schema({
   phone: String,
   avatar: String,
   company: String, // For employers
+  isAdmin: {
+    type: Boolean,
+    default: false,
+  },
   createdAt: {
     type: Date,
     default: Date.now,

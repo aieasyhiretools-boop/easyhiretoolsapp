@@ -30,7 +30,7 @@ function Navbar({ isAuthenticated, user, onLogout }) {
           )}
           {!isAuthenticated && (
             <>
-              <Link to="/login" className="nav-link">Login</Link>
+              <Link to="/role-select" className="nav-link">Login</Link>
               <Link to="/register" className="nav-link register-btn">Register</Link>
             </>
           )}

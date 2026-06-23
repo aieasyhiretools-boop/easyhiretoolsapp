@@ -11,6 +11,11 @@ import JobDetail from './pages/JobDetail';
 import PostJob from './pages/PostJob';
 import Profile from './pages/Profile';
 import Resumes from './pages/Resumes';
+import RoleSelect from './pages/RoleSelect';
+import CandidateLogin from './pages/CandidateLogin';
+import EmployerLogin from './pages/EmployerLogin';
+import AdminLogin from './pages/AdminLogin';
+import AdminDashboard from './pages/AdminDashboard';
 
 function App() {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
@@ -27,16 +32,14 @@ function App() {
     setLoading(false);
   }, []);
 
-  const handleLogout = () => {
-    localStorage.removeItem('token');
-    localStorage.removeItem('user');
-    setIsAuthenticated(false);
-    setUser(null);
+  const handleLoginSuccess = () => {
+    const token = localStorage.getItem('token');
+    const userData = localStorage.getItem('user');
+    if (token && userData) {
+      setIsAuthenticated(true);
+      setUser(JSON.parse(userData));
+    }
   };
-
-  if (loading) {
-    return <div className="container"><p>Loading...</p></div>;
-  }
 
   return (
     <Router>
@@ -45,13 +48,18 @@ function App() {
         <div className="main-content">
           <Routes>
             <Route path="/" element={<Home />} />
+            <Route path="/role-select" element={<RoleSelect />} />
+            <Route path="/candidate-login" element={isAuthenticated ? <Navigate to="/jobs" /> : <CandidateLogin onLoginSuccess={handleLoginSuccess} />} />
+            <Route path="/employer-login" element={isAuthenticated ? <Navigate to="/post-job" /> : <EmployerLogin onLoginSuccess={handleLoginSuccess} />} />
+            <Route path="/admin-login" element={isAuthenticated ? <Navigate to="/admin-dashboard" /> : <AdminLogin onLoginSuccess={handleLoginSuccess} />} />
+            <Route path="/admin-dashboard" element={isAuthenticated ? <AdminDashboard /> : <Navigate to="/admin-login" />} />
             <Route path="/login" element={isAuthenticated ? <Navigate to="/jobs" /> : <Login setIsAuthenticated={setIsAuthenticated} setUser={setUser} />} />
             <Route path="/register" element={isAuthenticated ? <Navigate to="/jobs" /> : <Register />} />
             <Route path="/jobs" element={<Jobs />} />
             <Route path="/jobs/:id" element={<JobDetail />} />
-            <Route path="/post-job" element={isAuthenticated ? <PostJob /> : <Navigate to="/login" />} />
-            <Route path="/profile" element={isAuthenticated ? <Profile user={user} /> : <Navigate to="/login" />} />
-            <Route path="/resumes" element={isAuthenticated ? <Resumes /> : <Navigate to="/login" />} />
+            <Route path="/post-job" element={isAuthenticated ? <PostJob /> : <Navigate to="/employer-login" />} />
+            <Route path="/profile" element={isAuthenticated ? <Profile user={user} /> : <Navigate to="/candidate-login" />} />
+            <Route path="/resumes" element={isAuthenticated ? <Resumes /> : <Navigate to="/candidate-login" />} />
           </Routes>
         </div>
         <Footer />
