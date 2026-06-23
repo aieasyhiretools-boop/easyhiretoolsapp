@@ -11,6 +11,13 @@
   border-radius: 10px;
 }
 
+.hero-logo {
+  height: 80px;
+  width: auto;
+  margin-bottom: 20px;
+  display: block;
+}
+
 .hero h1 {
   font-size: 3rem;
   margin-bottom: 20px;

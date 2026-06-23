@@ -18,11 +18,13 @@
   text-decoration: none;
   display: flex;
   align-items: center;
-  gap: 8px;
+  gap: 12px;
 }
 
-.logo-icon {
-  font-size: 2rem;
+.logo-img {
+  height: 40px;
+  width: auto;
+  display: block;
 }
 
 .navbar-menu {
