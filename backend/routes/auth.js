@@ -9,10 +9,15 @@ router.post('/register', async (req, res) => {
   try {
     const { name, email, password, userType } = req.body;
 
+    // Validation
+    if (!name || !email || !password || !userType) {
+      return res.status(400).json({ message: 'All fields are required' });
+    }
+
     // Check if user exists
     let user = await User.findOne({ email });
     if (user) {
-      return res.status(400).json({ message: 'User already exists' });
+      return res.status(400).json({ message: 'User already exists with this email' });
     }
 
     user = new User({
@@ -40,7 +45,8 @@ router.post('/register', async (req, res) => {
       },
     });
   } catch (err) {
-    res.status(500).json({ message: err.message });
+    console.error('Registration error:', err);
+    res.status(500).json({ message: err.message || 'Registration failed' });
   }
 });
 

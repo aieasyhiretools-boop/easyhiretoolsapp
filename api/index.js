@@ -21,19 +21,31 @@ const connectDB = async () => {
   }
 
   try {
-    await mongoose.connect(process.env.MONGODB_URI || 'mongodb://localhost:27017/easyhire', {
+    const conn = await mongoose.connect(process.env.MONGODB_URI || 'mongodb://localhost:27017/easyhire', {
       useNewUrlParser: true,
       useUnifiedTopology: true,
+      serverSelectionTimeoutMS: 10000,
+      socketTimeoutMS: 45000,
     });
-    isConnected = true;
+    isConnected = conn.connections[0].readyState === 1;
     console.log('MongoDB connected');
   } catch (err) {
-    console.log('MongoDB connection error:', err);
+    console.error('MongoDB connection error:', err.message);
+    isConnected = false;
   }
 };
 
 // JWT Authentication Middleware
 const jwt = require('jsonwebtoken');
+
+// Ensure DB connection before handling requests
+app.use(async (req, res, next) => {
+  if (!isConnected) {
+    await connectDB();
+  }
+  next();
+});
+
 app.use((req, res, next) => {
   const token = req.headers.authorization?.split(' ')[1];
   if (token) {
