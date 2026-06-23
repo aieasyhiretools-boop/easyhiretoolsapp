@@ -9,12 +9,16 @@ function AdminDashboard() {
   const [stats, setStats] = useState({});
   const [activeTab, setActiveTab] = useState('dashboard');
   const [loading, setLoading] = useState(false);
+  const [searchTerm, setSearchTerm] = useState('');
+  const [adminInfo, setAdminInfo] = useState(null);
 
   useEffect(() => {
     const userRole = localStorage.getItem('userRole');
     if (userRole !== 'admin') {
       navigate('/');
     }
+    const user = JSON.parse(localStorage.getItem('user') || '{}');
+    setAdminInfo(user);
     loadDashboardData();
   }, [navigate]);
 
@@ -30,8 +34,14 @@ function AdminDashboard() {
         fetch('/api/admin/stats', { headers }),
       ]);
 
-      if (usersRes.ok) setUsers(await usersRes.json());
-      if (jobsRes.ok) setJobs(await jobsRes.json());
+      if (usersRes.ok) {
+        const usersData = await usersRes.json();
+        setUsers(Array.isArray(usersData) ? usersData : []);
+      }
+      if (jobsRes.ok) {
+        const jobsData = await jobsRes.json();
+        setJobs(Array.isArray(jobsData) ? jobsData : []);
+      }
       if (statsRes.ok) setStats(await statsRes.json());
     } catch (err) {
       console.error('Failed to load dashboard data:', err);
@@ -52,10 +62,10 @@ function AdminDashboard() {
 
       if (response.ok) {
         setUsers(users.filter((u) => u._id !== userId));
-        alert('User deleted successfully');
+        alert('✅ User deleted successfully');
       }
     } catch (err) {
-      alert('Failed to delete user');
+      alert('❌ Failed to delete user');
     }
   };
 
@@ -69,10 +79,10 @@ function AdminDashboard() {
 
       if (response.ok) {
         loadDashboardData();
-        alert('Job approved');
+        alert('✅ Job approved');
       }
     } catch (err) {
-      alert('Failed to approve job');
+      alert('❌ Failed to approve job');
     }
   };
 
@@ -86,10 +96,10 @@ function AdminDashboard() {
 
       if (response.ok) {
         setJobs(jobs.filter((j) => j._id !== jobId));
-        alert('Job rejected');
+        alert('✅ Job rejected');
       }
     } catch (err) {
-      alert('Failed to reject job');
+      alert('❌ Failed to reject job');
     }
   };
 
@@ -100,15 +110,33 @@ function AdminDashboard() {
     navigate('/');
   };
 
+  const filteredUsers = users.filter((user) =>
+    user.name?.toLowerCase().includes(searchTerm.toLowerCase()) ||
+    user.email?.toLowerCase().includes(searchTerm.toLowerCase())
+  );
+
+  const filteredJobs = jobs.filter((job) =>
+    job.title?.toLowerCase().includes(searchTerm.toLowerCase()) ||
+    job.company?.toLowerCase().includes(searchTerm.toLowerCase())
+  );
+
   return (
     <div className="admin-dashboard">
       <div className="admin-header">
         <div className="admin-title">
-          <h1>⚙️ Admin Dashboard</h1>
+          <div className="header-content">
+            <h1>⚙️ Super Admin Dashboard</h1>
+            <p className="header-subtitle">Platform Management & Analytics</p>
+          </div>
         </div>
-        <button onClick={handleLogout} className="logout-btn">
-          Logout
-        </button>
+        <div className="admin-header-right">
+          <div className="admin-info">
+            <span>👤 {adminInfo?.name || 'Admin'}</span>
+          </div>
+          <button onClick={handleLogout} className="logout-btn">
+            🚪 Logout
+          </button>
+        </div>
       </div>
 
       <div className="admin-container">
@@ -118,54 +146,85 @@ function AdminDashboard() {
               className={`nav-item ${activeTab === 'dashboard' ? 'active' : ''}`}
               onClick={() => setActiveTab('dashboard')}
             >
-              📊 Dashboard
+              <span className="nav-icon">📊</span>
+              <span>Dashboard</span>
             </button>
             <button
               className={`nav-item ${activeTab === 'users' ? 'active' : ''}`}
               onClick={() => setActiveTab('users')}
             >
-              👥 Users
+              <span className="nav-icon">👥</span>
+              <span>Users ({users.length})</span>
             </button>
             <button
               className={`nav-item ${activeTab === 'jobs' ? 'active' : ''}`}
               onClick={() => setActiveTab('jobs')}
             >
-              💼 Jobs
+              <span className="nav-icon">💼</span>
+              <span>Jobs ({jobs.length})</span>
             </button>
           </nav>
+
+          <div className="sidebar-footer">
+            <div className="support-box">
+              <h4>🆘 Need Help?</h4>
+              <p>Contact support team</p>
+            </div>
+          </div>
         </div>
 
         <div className="admin-content">
           {activeTab === 'dashboard' && (
             <div className="dashboard-tab">
-              <h2>Platform Statistics</h2>
+              <h2>📈 Platform Statistics</h2>
               <div className="stats-grid">
-                <div className="stat-card">
+                <div className="stat-card total-users">
                   <div className="stat-icon">👥</div>
                   <div className="stat-info">
                     <h3>Total Users</h3>
                     <p className="stat-number">{stats.totalUsers || 0}</p>
+                    <span className="stat-trend">↑ Platform Users</span>
                   </div>
                 </div>
-                <div className="stat-card">
+                <div className="stat-card total-jobs">
                   <div className="stat-icon">💼</div>
                   <div className="stat-info">
                     <h3>Total Jobs</h3>
                     <p className="stat-number">{stats.totalJobs || 0}</p>
+                    <span className="stat-trend">↑ Job Postings</span>
                   </div>
                 </div>
-                <div className="stat-card">
+                <div className="stat-card pending-jobs">
                   <div className="stat-icon">📝</div>
                   <div className="stat-info">
                     <h3>Pending Jobs</h3>
                     <p className="stat-number">{stats.pendingJobs || 0}</p>
+                    <span className="stat-trend">⏳ Need Approval</span>
                   </div>
                 </div>
-                <div className="stat-card">
+                <div className="stat-card total-resumes">
                   <div className="stat-icon">📄</div>
                   <div className="stat-info">
                     <h3>Total Resumes</h3>
                     <p className="stat-number">{stats.totalResumes || 0}</p>
+                    <span className="stat-trend">📂 Submissions</span>
+                  </div>
+                </div>
+              </div>
+
+              <div className="dashboard-actions">
+                <div className="action-card">
+                  <h3>🎯 Quick Actions</h3>
+                  <div className="action-buttons">
+                    <button className="action-btn" onClick={() => setActiveTab('users')}>
+                      Manage Users
+                    </button>
+                    <button className="action-btn" onClick={() => setActiveTab('jobs')}>
+                      Review Jobs
+                    </button>
+                    <button className="action-btn" onClick={() => loadDashboardData()}>
+                      Refresh Data
+                    </button>
                   </div>
                 </div>
               </div>
@@ -174,9 +233,21 @@ function AdminDashboard() {
 
           {activeTab === 'users' && (
             <div className="users-tab">
-              <h2>Manage Users</h2>
+              <div className="tab-header">
+                <h2>👥 Manage Users</h2>
+                <input
+                  type="text"
+                  placeholder="🔍 Search by name or email..."
+                  className="search-box"
+                  value={searchTerm}
+                  onChange={(e) => setSearchTerm(e.target.value)}
+                />
+              </div>
+
               {loading ? (
-                <p>Loading users...</p>
+                <p className="loading">Loading users...</p>
+              ) : filteredUsers.length === 0 ? (
+                <p className="no-data">No users found</p>
               ) : (
                 <div className="table-container">
                   <table>
@@ -185,27 +256,34 @@ function AdminDashboard() {
                         <th>Name</th>
                         <th>Email</th>
                         <th>Role</th>
-                        <th>Status</th>
+                        <th>Type</th>
                         <th>Actions</th>
                       </tr>
                     </thead>
                     <tbody>
-                      {users.map((user) => (
+                      {filteredUsers.map((user) => (
                         <tr key={user._id}>
-                          <td>{user.name}</td>
+                          <td>
+                            <div className="user-name">
+                              <span className="avatar">{user.name?.charAt(0)}</span>
+                              {user.name}
+                            </div>
+                          </td>
                           <td>{user.email}</td>
                           <td>
-                            <span className={`role-badge ${user.role}`}>{user.role}</span>
+                            <span className={`role-badge ${user.userType}`}>
+                              {user.userType === 'jobseeker' ? '👤 Candidate' : '🏢 Employer'}
+                            </span>
                           </td>
                           <td>
-                            <span className="status-badge active">Active</span>
+                            <span className="type-badge">{user.userType}</span>
                           </td>
                           <td>
                             <button
                               className="btn-delete"
                               onClick={() => handleDeleteUser(user._id)}
                             >
-                              Delete
+                              🗑️ Delete
                             </button>
                           </td>
                         </tr>
@@ -219,35 +297,62 @@ function AdminDashboard() {
 
           {activeTab === 'jobs' && (
             <div className="jobs-tab">
-              <h2>Manage Jobs</h2>
+              <div className="tab-header">
+                <h2>💼 Manage Jobs</h2>
+                <input
+                  type="text"
+                  placeholder="🔍 Search by title or company..."
+                  className="search-box"
+                  value={searchTerm}
+                  onChange={(e) => setSearchTerm(e.target.value)}
+                />
+              </div>
+
               {loading ? (
-                <p>Loading jobs...</p>
+                <p className="loading">Loading jobs...</p>
+              ) : filteredJobs.length === 0 ? (
+                <p className="no-data">No pending jobs to review</p>
               ) : (
                 <div className="jobs-list">
-                  {jobs.map((job) => (
+                  {filteredJobs.map((job) => (
                     <div key={job._id} className="job-item">
                       <div className="job-info">
                         <h3>{job.title}</h3>
-                        <p>{job.company}</p>
+                        <p className="company-name">🏢 {job.company}</p>
                         <div className="job-meta">
-                          <span>📍 {job.location}</span>
-                          <span>💰 {job.salary}</span>
+                          <span className="meta-item">📍 {job.location}</span>
+                          <span className="meta-item">💰 {job.salary}</span>
+                          <span className="meta-item">⏱️ {job.experience}</span>
                         </div>
+                        <p className="job-description">{job.description?.substring(0, 100)}...</p>
                       </div>
                       <div className="job-actions">
                         <button
                           className="btn-approve"
                           onClick={() => handleApproveJob(job._id)}
                         >
-                          Approve
+                          ✅ Approve
                         </button>
                         <button
                           className="btn-reject"
                           onClick={() => handleRejectJob(job._id)}
                         >
-                          Reject
+                          ❌ Reject
                         </button>
                       </div>
+                    </div>
+                  ))}
+                </div>
+              )}
+            </div>
+          )}
+        </div>
+      </div>
+    </div>
+  );
+}
+
+export default AdminDashboard;
                     </div>
                   ))}
                 </div>
