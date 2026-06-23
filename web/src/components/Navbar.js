@@ -1,10 +1,10 @@
 import React from 'react';
 import { Link, useNavigate } from 'react-router-dom';
+import logo from '../Easy_Hire_Tools_logo.png';
 import './Navbar.css';
 
 function Navbar({ isAuthenticated, user, onLogout }) {
   const navigate = useNavigate();
-  const logoUrl = `${process.env.PUBLIC_URL}/Easy_Hire_Tools_logo.png`;
 
   const handleLogout = () => {
     onLogout();
@@ -15,7 +15,7 @@ function Navbar({ isAuthenticated, user, onLogout }) {
     <nav className="navbar">
       <div className="container navbar-content">
         <Link to="/" className="navbar-logo">
-          <img src={logoUrl} alt="EasyHire Tools" className="logo-img" />
+          <img src={logo} alt="EasyHire Tools" className="logo-img" />
         </Link>
         <div className="navbar-menu">
           <Link to="/jobs" className="nav-link">Jobs</Link>

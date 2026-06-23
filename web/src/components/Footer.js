@@ -1,15 +1,15 @@
 import React from 'react';
+import logo from '../Easy_Hire_Tools_logo.png';
 import './Footer.css';
 
 function Footer() {
   const currentYear = new Date().getFullYear();
-  const logoUrl = `${process.env.PUBLIC_URL}/Easy_Hire_Tools_logo.png`;
 
   return (
     <footer className="footer">
       <div className="container footer-content">
         <div className="footer-section">
-          <img src={logoUrl} alt="EasyHire Tools" className="footer-logo" />
+          <img src={logo} alt="EasyHire Tools" className="footer-logo" />
         </div>
         
         <div className="footer-section">
