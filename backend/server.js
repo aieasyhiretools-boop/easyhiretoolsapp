@@ -20,6 +20,21 @@ mongoose.connect(process.env.MONGODB_URI || 'mongodb://localhost:27017/easyhire'
 .then(() => console.log('MongoDB connected'))
 .catch(err => console.log('MongoDB connection error:', err));
 
+// Root route
+app.get('/', (req, res) => {
+  res.json({ 
+    message: 'EasyHire Tools API',
+    version: '1.0.0',
+    endpoints: {
+      auth: '/api/auth',
+      jobs: '/api/jobs',
+      resumes: '/api/resumes',
+      users: '/api/users',
+      health: '/api/health'
+    }
+  });
+});
+
 // Routes
 app.use('/api/auth', require('./routes/auth'));
 app.use('/api/jobs', require('./routes/jobs'));
