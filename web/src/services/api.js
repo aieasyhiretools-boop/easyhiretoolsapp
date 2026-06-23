@@ -1,6 +1,7 @@
 import axios from 'axios';
 
-const API_BASE_URL = 'https://easyhiretoolsapp.vercel.app/api';
+// Use relative URL for API calls - works on both local and production
+const API_BASE_URL = '/api';
 
 const api = axios.create({
   baseURL: API_BASE_URL,
