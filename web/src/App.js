@@ -41,6 +41,18 @@ function App() {
     }
   };
 
+  const handleLogout = () => {
+    localStorage.removeItem('token');
+    localStorage.removeItem('user');
+    localStorage.removeItem('userRole');
+    setIsAuthenticated(false);
+    setUser(null);
+  };
+
+  if (loading) {
+    return <div className="container"><p>Loading...</p></div>;
+  }
+
   return (
     <Router>
       <div className="app-wrapper">
