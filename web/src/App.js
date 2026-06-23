@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
 import './App.css';
 import Navbar from './components/Navbar';
+import Footer from './components/Footer';
 import Home from './pages/Home';
 import Login from './pages/Login';
 import Register from './pages/Register';
@@ -39,18 +40,21 @@ function App() {
 
   return (
     <Router>
-      <Navbar isAuthenticated={isAuthenticated} user={user} onLogout={handleLogout} />
-      <div className="main-content">
-        <Routes>
-          <Route path="/" element={<Home />} />
-          <Route path="/login" element={isAuthenticated ? <Navigate to="/jobs" /> : <Login setIsAuthenticated={setIsAuthenticated} setUser={setUser} />} />
-          <Route path="/register" element={isAuthenticated ? <Navigate to="/jobs" /> : <Register />} />
-          <Route path="/jobs" element={<Jobs />} />
-          <Route path="/jobs/:id" element={<JobDetail />} />
-          <Route path="/post-job" element={isAuthenticated ? <PostJob /> : <Navigate to="/login" />} />
-          <Route path="/profile" element={isAuthenticated ? <Profile user={user} /> : <Navigate to="/login" />} />
-          <Route path="/resumes" element={isAuthenticated ? <Resumes /> : <Navigate to="/login" />} />
-        </Routes>
+      <div className="app-wrapper">
+        <Navbar isAuthenticated={isAuthenticated} user={user} onLogout={handleLogout} />
+        <div className="main-content">
+          <Routes>
+            <Route path="/" element={<Home />} />
+            <Route path="/login" element={isAuthenticated ? <Navigate to="/jobs" /> : <Login setIsAuthenticated={setIsAuthenticated} setUser={setUser} />} />
+            <Route path="/register" element={isAuthenticated ? <Navigate to="/jobs" /> : <Register />} />
+            <Route path="/jobs" element={<Jobs />} />
+            <Route path="/jobs/:id" element={<JobDetail />} />
+            <Route path="/post-job" element={isAuthenticated ? <PostJob /> : <Navigate to="/login" />} />
+            <Route path="/profile" element={isAuthenticated ? <Profile user={user} /> : <Navigate to="/login" />} />
+            <Route path="/resumes" element={isAuthenticated ? <Resumes /> : <Navigate to="/login" />} />
+          </Routes>
+        </div>
+        <Footer />
       </div>
     </Router>
   );

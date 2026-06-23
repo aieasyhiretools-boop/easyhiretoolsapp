@@ -15,7 +15,6 @@ function Navbar({ isAuthenticated, user, onLogout }) {
       <div className="container navbar-content">
         <Link to="/" className="navbar-logo">
           <img src="/Easy_Hire_Tools_logo.png" alt="EasyHire Tools" className="logo-img" />
-          EasyHire Tools
         </Link>
         <div className="navbar-menu">
           <Link to="/jobs" className="nav-link">Jobs</Link>
