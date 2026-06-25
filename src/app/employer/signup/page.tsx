@@ -1,10 +1,12 @@
 'use client'
 
 import { useState } from 'react'
+import { useRouter } from 'next/navigation'
 import Link from 'next/link'
 import { Mail, Lock, Building, Phone, MapPin, ArrowRight } from 'lucide-react'
 
 export default function EmployerSignup() {
+  const router = useRouter()
   const [formData, setFormData] = useState({
     companyName: '',
     email: '',
@@ -14,24 +16,38 @@ export default function EmployerSignup() {
     confirmPassword: '',
   })
   const [isLoading, setIsLoading] = useState(false)
+  const [error, setError] = useState('')
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setFormData({
       ...formData,
       [e.target.name]: e.target.value,
     })
+    setError('')
   }
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault()
-    if (formData.password !== formData.confirmPassword) {
-      alert('Passwords do not match!')
+    
+    if (!formData.companyName || !formData.email || !formData.password || !formData.confirmPassword) {
+      setError('Please fill in all required fields')
       return
     }
+
+    if (formData.password !== formData.confirmPassword) {
+      setError('Passwords do not match!')
+      return
+    }
+
+    if (formData.password.length < 6) {
+      setError('Password must be at least 6 characters')
+      return
+    }
+
     setIsLoading(true)
     setTimeout(() => {
       setIsLoading(false)
-      alert('Account created! Redirecting to login...')
+      router.push('/employer/dashboard')
     }, 1500)
   }
 
@@ -44,6 +60,13 @@ export default function EmployerSignup() {
             <h1 className="text-3xl font-bold text-gray-900 mb-2">Register Your Company</h1>
             <p className="text-gray-600">Start hiring top talent today</p>
           </div>
+
+          {/* Error Message */}
+          {error && (
+            <div className="mb-6 p-4 bg-red-50 border border-red-200 rounded-lg">
+              <p className="text-red-700 font-semibold text-sm">{error}</p>
+            </div>
+          )}
 
           {/* Form */}
           <form onSubmit={handleSubmit} className="space-y-4">

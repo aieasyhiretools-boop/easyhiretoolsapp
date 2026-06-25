@@ -1,27 +1,36 @@
 'use client'
 
 import { useState } from 'react'
+import { useRouter } from 'next/navigation'
 import Link from 'next/link'
 import { Mail, Lock, ArrowRight } from 'lucide-react'
 
 export default function JobSeekerLogin() {
+  const router = useRouter()
   const [formData, setFormData] = useState({ email: '', password: '' })
   const [isLoading, setIsLoading] = useState(false)
+  const [error, setError] = useState('')
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setFormData({
       ...formData,
       [e.target.name]: e.target.value,
     })
+    setError('')
   }
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault()
+    
+    if (!formData.email || !formData.password) {
+      setError('Please fill in all fields')
+      return
+    }
+
     setIsLoading(true)
-    // Simulate login
     setTimeout(() => {
       setIsLoading(false)
-      alert('Login successful! Redirecting to dashboard...')
+      router.push('/jobseeker/dashboard')
     }, 1500)
   }
 
@@ -34,6 +43,13 @@ export default function JobSeekerLogin() {
             <h1 className="text-3xl font-bold text-gray-900 mb-2">Job Seeker</h1>
             <p className="text-gray-600">Sign in to find your dream job</p>
           </div>
+
+          {/* Error Message */}
+          {error && (
+            <div className="mb-6 p-4 bg-red-50 border border-red-200 rounded-lg">
+              <p className="text-red-700 font-semibold text-sm">{error}</p>
+            </div>
+          )}
 
           {/* Form */}
           <form onSubmit={handleSubmit} className="space-y-6">
