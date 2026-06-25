@@ -1,7 +1,6 @@
 'use client'
 
 import Link from 'next/link'
-import Image from 'next/image'
 import { Menu, X } from 'lucide-react'
 import { useState } from 'react'
 
@@ -11,19 +10,15 @@ export default function Navbar() {
   return (
     <nav className="bg-white shadow-md sticky top-0 z-50">
       <div className="container mx-auto px-6">
-        <div className="flex items-center justify-between py-3">
+        <div className="flex items-center justify-between py-2">
           {/* Logo */}
           <Link href="/" className="flex items-center group">
-            <div className="relative w-16 h-16 lg:w-20 lg:h-20">
-              <Image
-                src="/logo.png"
-                alt="EasyHireTools"
-                width={80}
-                height={80}
-                priority
-                className="object-contain"
-              />
-            </div>
+            <img
+              src="/logo.png"
+              alt="EasyHireTools"
+              className="h-24 w-auto object-contain"
+              loading="eager"
+            />
           </Link>
 
           {/* Desktop Menu */}
