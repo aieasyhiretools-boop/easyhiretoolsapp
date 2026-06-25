@@ -12,41 +12,10 @@
       "static/chunks/fd9d1056-357a9aa7cf7b0906.js",
       "static/chunks/117-2da535c0e578b6a9.js",
       "static/chunks/main-app-a692e37061392f40.js",
-      "static/css/9cf35142a1b62bc0.css",
+      "static/css/03a0794f7432a7bc.css",
       "static/chunks/451-97e3667581fdef6f.js",
       "static/chunks/374-999aa087d3d983e7.js",
-      "static/chunks/app/layout-92696ff58d775008.js"
-    ],
-    "/employer/login/page": [
-      "static/chunks/webpack-616e068a201ad621.js",
-      "static/chunks/fd9d1056-357a9aa7cf7b0906.js",
-      "static/chunks/117-2da535c0e578b6a9.js",
-      "static/chunks/main-app-a692e37061392f40.js",
-      "static/chunks/451-97e3667581fdef6f.js",
-      "static/chunks/app/employer/login/page-aaa83e8d40cf7f30.js"
-    ],
-    "/jobseeker/dashboard/page": [
-      "static/chunks/webpack-616e068a201ad621.js",
-      "static/chunks/fd9d1056-357a9aa7cf7b0906.js",
-      "static/chunks/117-2da535c0e578b6a9.js",
-      "static/chunks/main-app-a692e37061392f40.js",
-      "static/chunks/app/jobseeker/dashboard/page-176aa6019f0095e5.js"
-    ],
-    "/jobseeker/login/page": [
-      "static/chunks/webpack-616e068a201ad621.js",
-      "static/chunks/fd9d1056-357a9aa7cf7b0906.js",
-      "static/chunks/117-2da535c0e578b6a9.js",
-      "static/chunks/main-app-a692e37061392f40.js",
-      "static/chunks/451-97e3667581fdef6f.js",
-      "static/chunks/app/jobseeker/login/page-b492ba353c24cfd7.js"
-    ],
-    "/jobseeker/signup/page": [
-      "static/chunks/webpack-616e068a201ad621.js",
-      "static/chunks/fd9d1056-357a9aa7cf7b0906.js",
-      "static/chunks/117-2da535c0e578b6a9.js",
-      "static/chunks/main-app-a692e37061392f40.js",
-      "static/chunks/451-97e3667581fdef6f.js",
-      "static/chunks/app/jobseeker/signup/page-d9542d87c6e7bdd2.js"
+      "static/chunks/app/layout-26a04bab1a5a0e3f.js"
     ],
     "/employer/signup/page": [
       "static/chunks/webpack-616e068a201ad621.js",
@@ -56,12 +25,13 @@
       "static/chunks/451-97e3667581fdef6f.js",
       "static/chunks/app/employer/signup/page-0c25c574c8c7d472.js"
     ],
-    "/employer/dashboard/page": [
+    "/jobseeker/login/page": [
       "static/chunks/webpack-616e068a201ad621.js",
       "static/chunks/fd9d1056-357a9aa7cf7b0906.js",
       "static/chunks/117-2da535c0e578b6a9.js",
       "static/chunks/main-app-a692e37061392f40.js",
-      "static/chunks/app/employer/dashboard/page-5adfbf1ec20875ca.js"
+      "static/chunks/451-97e3667581fdef6f.js",
+      "static/chunks/app/jobseeker/login/page-b492ba353c24cfd7.js"
     ],
     "/page": [
       "static/chunks/webpack-616e068a201ad621.js",
@@ -70,6 +40,36 @@
       "static/chunks/main-app-a692e37061392f40.js",
       "static/chunks/451-97e3667581fdef6f.js",
       "static/chunks/app/page-727a602014f1a442.js"
+    ],
+    "/jobseeker/signup/page": [
+      "static/chunks/webpack-616e068a201ad621.js",
+      "static/chunks/fd9d1056-357a9aa7cf7b0906.js",
+      "static/chunks/117-2da535c0e578b6a9.js",
+      "static/chunks/main-app-a692e37061392f40.js",
+      "static/chunks/451-97e3667581fdef6f.js",
+      "static/chunks/app/jobseeker/signup/page-d9542d87c6e7bdd2.js"
+    ],
+    "/employer/login/page": [
+      "static/chunks/webpack-616e068a201ad621.js",
+      "static/chunks/fd9d1056-357a9aa7cf7b0906.js",
+      "static/chunks/117-2da535c0e578b6a9.js",
+      "static/chunks/main-app-a692e37061392f40.js",
+      "static/chunks/451-97e3667581fdef6f.js",
+      "static/chunks/app/employer/login/page-aaa83e8d40cf7f30.js"
+    ],
+    "/employer/dashboard/page": [
+      "static/chunks/webpack-616e068a201ad621.js",
+      "static/chunks/fd9d1056-357a9aa7cf7b0906.js",
+      "static/chunks/117-2da535c0e578b6a9.js",
+      "static/chunks/main-app-a692e37061392f40.js",
+      "static/chunks/app/employer/dashboard/page-5adfbf1ec20875ca.js"
+    ],
+    "/jobseeker/dashboard/page": [
+      "static/chunks/webpack-616e068a201ad621.js",
+      "static/chunks/fd9d1056-357a9aa7cf7b0906.js",
+      "static/chunks/117-2da535c0e578b6a9.js",
+      "static/chunks/main-app-a692e37061392f40.js",
+      "static/chunks/app/jobseeker/dashboard/page-176aa6019f0095e5.js"
     ]
   }
 }
