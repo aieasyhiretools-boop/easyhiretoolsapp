@@ -1,8 +1,9 @@
 'use client'
 
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import Link from 'next/link'
-import { Search, MapPin, DollarSign, Briefcase, Clock, Sparkles, FileText, ArrowRight } from 'lucide-react'
+import { Search, MapPin, DollarSign, Briefcase, Clock, Sparkles, FileText, ArrowRight, XCircle } from 'lucide-react'
+import { getSession, getAllUsers } from '@/lib/auth'
 
 const SAMPLE_JOBS = [
   {
@@ -50,10 +51,19 @@ const SAMPLE_JOBS = [
 export default function JobSearch() {
   const [searchTerm, setSearchTerm] = useState('')
   const [selectedJob, setSelectedJob] = useState<number | null>(null)
+  const [approvalStatus, setApprovalStatus] = useState<'loading' | 'pending' | 'approved' | 'rejected' | 'unknown'>('loading')
   const [filters, setFilters] = useState({
     jobType: 'all',
     location: 'all',
   })
+
+  useEffect(() => {
+    const session = getSession()
+    if (!session) { setApprovalStatus('unknown'); return }
+    const users = getAllUsers()
+    const fresh = users.find(u => u.id === session.id)
+    setApprovalStatus((fresh?.status ?? session.status) as any)
+  }, [])
 
   const filteredJobs = SAMPLE_JOBS.filter((job) => {
     const matchesSearch = job.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
@@ -66,6 +76,32 @@ export default function JobSearch() {
   return (
     <div className="min-h-screen bg-gradient-to-br from-gray-50 to-gray-100 py-12 px-6">
       <div className="container mx-auto max-w-6xl">
+
+        {/* Approval Gate */}
+        {approvalStatus === 'pending' && (
+          <div className="flex flex-col items-center justify-center py-24 text-center">
+            <div className="w-20 h-20 bg-yellow-100 rounded-full flex items-center justify-center mb-6">
+              <Clock className="w-10 h-10 text-yellow-600" />
+            </div>
+            <h2 className="text-2xl font-bold text-gray-900 mb-3">Account Pending Approval</h2>
+            <p className="text-gray-600 max-w-md mb-4">Your account is awaiting admin approval. You will be able to browse and apply for jobs once approved.</p>
+            <div className="px-6 py-3 bg-yellow-50 border border-yellow-300 rounded-xl">
+              <p className="text-yellow-800 font-semibold text-sm">⏳ Awaiting Admin Approval</p>
+            </div>
+          </div>
+        )}
+
+        {approvalStatus === 'rejected' && (
+          <div className="flex flex-col items-center justify-center py-24 text-center">
+            <div className="w-20 h-20 bg-red-100 rounded-full flex items-center justify-center mb-6">
+              <XCircle className="w-10 h-10 text-red-600" />
+            </div>
+            <h2 className="text-2xl font-bold text-gray-900 mb-3">Account Rejected</h2>
+            <p className="text-gray-600 max-w-md">Your account has been rejected. Please contact support for more information.</p>
+          </div>
+        )}
+
+        {(approvalStatus === 'approved' || approvalStatus === 'unknown') && <>
         {/* Header */}
         <div className="text-center mb-12">
           <h1 className="text-4xl font-bold text-gray-900 mb-3">Find Your Perfect Job</h1>
@@ -237,6 +273,7 @@ export default function JobSearch() {
             )}
           </div>
         </div>
+        </>}
       </div>
     </div>
   )

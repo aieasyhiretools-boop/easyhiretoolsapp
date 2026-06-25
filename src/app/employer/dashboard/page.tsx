@@ -1,7 +1,8 @@
 'use client'
 
-import { useState } from 'react'
-import { Plus, Edit, Trash2, Eye } from 'lucide-react'
+import { useState, useEffect } from 'react'
+import { Plus, Edit, Trash2, Eye, Clock, XCircle, ShieldCheck } from 'lucide-react'
+import { getSession, getAllUsers, RegisteredUser } from '@/lib/auth'
 
 interface PostedJob {
   id: number
@@ -34,6 +35,7 @@ const SAMPLE_POSTED_JOBS: PostedJob[] = [
 export default function EmployerDashboard() {
   const [jobs, setJobs] = useState<PostedJob[]>(SAMPLE_POSTED_JOBS)
   const [showPostForm, setShowPostForm] = useState(false)
+  const [approvalStatus, setApprovalStatus] = useState<'loading' | 'pending' | 'approved' | 'rejected' | 'unknown'>('loading')
   const [formData, setFormData] = useState({
     title: '',
     location: '',
@@ -41,6 +43,15 @@ export default function EmployerDashboard() {
     description: '',
     requirements: '',
   })
+
+  useEffect(() => {
+    const session = getSession()
+    if (!session) { setApprovalStatus('unknown'); return }
+    // Re-read from store to get latest status
+    const users = getAllUsers()
+    const fresh = users.find(u => u.id === session.id)
+    setApprovalStatus((fresh?.status ?? session.status) as any)
+  }, [])
 
   const handleInputChange = (
     e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
@@ -75,7 +86,33 @@ export default function EmployerDashboard() {
   return (
     <div className="min-h-screen bg-gradient-to-br from-gray-50 to-gray-100 py-12 px-6">
       <div className="container mx-auto max-w-6xl">
-        {/* Header */}
+
+        {/* Approval Gate */}
+        {approvalStatus === 'pending' && (
+          <div className="flex flex-col items-center justify-center py-24 text-center">
+            <div className="w-20 h-20 bg-yellow-100 rounded-full flex items-center justify-center mb-6">
+              <Clock className="w-10 h-10 text-yellow-600" />
+            </div>
+            <h2 className="text-2xl font-bold text-gray-900 mb-3">Account Pending Approval</h2>
+            <p className="text-gray-600 max-w-md mb-4">Your employer account is awaiting admin approval. You will be able to post jobs once approved.</p>
+            <div className="px-6 py-3 bg-yellow-50 border border-yellow-300 rounded-xl">
+              <p className="text-yellow-800 font-semibold text-sm">⏳ Awaiting Admin Approval</p>
+            </div>
+          </div>
+        )}
+
+        {approvalStatus === 'rejected' && (
+          <div className="flex flex-col items-center justify-center py-24 text-center">
+            <div className="w-20 h-20 bg-red-100 rounded-full flex items-center justify-center mb-6">
+              <XCircle className="w-10 h-10 text-red-600" />
+            </div>
+            <h2 className="text-2xl font-bold text-gray-900 mb-3">Account Rejected</h2>
+            <p className="text-gray-600 max-w-md">Your employer account application has been rejected. Please contact support for more information.</p>
+          </div>
+        )}
+
+        {/* Main Dashboard (only shown when approved or no session) */}
+        {(approvalStatus === 'approved' || approvalStatus === 'unknown') && <>
         <div className="flex items-center justify-between mb-8">
           <div>
             <h1 className="text-4xl font-bold text-gray-900">Employer Dashboard</h1>
@@ -257,6 +294,7 @@ export default function EmployerDashboard() {
             )}
           </div>
         </div>
+        </>}
       </div>
     </div>
   )

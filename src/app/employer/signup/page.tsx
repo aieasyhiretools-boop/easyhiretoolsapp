@@ -3,7 +3,8 @@
 import { useState } from 'react'
 import { useRouter } from 'next/navigation'
 import Link from 'next/link'
-import { Mail, Lock, Building, Phone, MapPin, ArrowRight } from 'lucide-react'
+import { Mail, Lock, Building, Phone, MapPin, ArrowRight, Clock } from 'lucide-react'
+import { registerUser, setSession } from '@/lib/auth'
 
 export default function EmployerSignup() {
   const router = useRouter()
@@ -17,6 +18,7 @@ export default function EmployerSignup() {
   })
   const [isLoading, setIsLoading] = useState(false)
   const [error, setError] = useState('')
+  const [registered, setRegistered] = useState(false)
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setFormData({
@@ -46,16 +48,41 @@ export default function EmployerSignup() {
 
     setIsLoading(true)
     setTimeout(() => {
+      const user = registerUser({
+        role: 'employer',
+        fullName: '',
+        companyName: formData.companyName,
+        email: formData.email,
+        phone: formData.phone,
+        location: formData.location,
+      })
+      setSession(user)
       setIsLoading(false)
-      router.push('/employer/dashboard')
-    }, 1500)
+      setRegistered(true)
+    }, 1000)
   }
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-accent-50 to-orange-50 flex items-center justify-center px-6 py-12">
       <div className="w-full max-w-md">
         <div className="card p-8 md:p-10">
+          {/* Pending Approval Screen */}
+          {registered && (
+            <div className="text-center py-8">
+              <div className="w-16 h-16 bg-yellow-100 rounded-full flex items-center justify-center mx-auto mb-4">
+                <Clock className="w-8 h-8 text-yellow-600" />
+              </div>
+              <h2 className="text-2xl font-bold text-gray-900 mb-2">Registration Submitted!</h2>
+              <p className="text-gray-600 mb-4">Your company account is <strong>pending admin approval</strong>.</p>
+              <p className="text-sm text-gray-500 mb-6">You will be able to post jobs once an administrator approves your account. This usually takes 1–2 business hours.</p>
+              <div className="p-4 bg-yellow-50 border border-yellow-200 rounded-xl">
+                <p className="text-yellow-800 text-sm font-semibold">⏳ Status: Awaiting Admin Approval</p>
+              </div>
+            </div>
+          )}
+
           {/* Header */}
+          {!registered && <>
           <div className="text-center mb-8">
             <h1 className="text-3xl font-bold text-gray-900 mb-2">Register Your Company</h1>
             <p className="text-gray-600">Start hiring top talent today</p>
@@ -213,6 +240,7 @@ export default function EmployerSignup() {
               </Link>
             </p>
           </div>
+          </>}
         </div>
       </div>
     </div>

@@ -1,7 +1,7 @@
 'use client'
 
 import Link from 'next/link'
-import { Menu, X } from 'lucide-react'
+import { Menu, X, Shield } from 'lucide-react'
 import { useState } from 'react'
 
 export default function Navbar() {
@@ -44,6 +44,10 @@ export default function Navbar() {
             </Link>
             <Link href="/employer/login" className="btn-secondary px-6 py-2">
               Employer
+            </Link>
+            <Link href="/admin/login" className="flex items-center gap-1.5 px-4 py-2 bg-gray-800 text-white text-sm font-semibold rounded-lg hover:bg-gray-900 transition">
+              <Shield className="w-3.5 h-3.5" />
+              Admin
             </Link>
           </div>
 
