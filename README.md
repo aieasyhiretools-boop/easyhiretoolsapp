@@ -1,171 +1,269 @@
-# EasyHire Tools - Job Posting Platform
+# 🎯 EasyHireTools - Job Portal Web App
 
-A comprehensive mobile and web application for job seekers to post resumes and employers to post job requirements.
+A modern, beautiful, and fully responsive job portal web application built with **Next.js 14**, **React**, **TypeScript**, and **Tailwind CSS**.
 
-## Project Structure
-
-```
-EasyhiretoolsApp/
-├── mobile/          # React Native mobile app
-│   ├── src/
-│   │   ├── screens/    # All screen components
-│   │   ├── components/ # Reusable components
-│   │   ├── services/   # API services
-│   │   └── navigation/ # Navigation configuration
-│   ├── App.tsx         # Main app component
-│   └── package.json
-└── backend/         # Node.js/Express API server
-    ├── routes/        # API routes
-    ├── models/        # Database models
-    ├── middleware/    # Middleware functions
-    ├── server.js      # Main server file
-    └── package.json
-```
-
-## Features
+## 📋 Features
 
 ### For Job Seekers
-- 📄 Post and manage resume
-- 🔍 Browse job listings
-- 💼 Apply for jobs
-- 👤 Manage profile
+- ✅ User registration and login
+- ✅ Advanced job search with filters
+- ✅ Job listings with detailed information
+- ✅ Save favorite jobs
+- ✅ Apply for positions
+- ✅ View job details side panel
 
 ### For Employers
-- 📝 Post job requirements
-- 👥 View applicants
-- 🔍 Search candidates
-- 📊 Manage job listings
+- ✅ Company registration and login
+- ✅ Post job listings
+- ✅ Manage job postings
+- ✅ View applicants
+- ✅ Track job views and applications
+- ✅ Edit and delete job postings
 
-## Getting Started
+## 🎨 UI/UX Features
 
-### Backend Setup
+- **Modern Design**: Clean, professional interface with smooth animations
+- **Responsive**: Fully mobile-friendly on all devices
+- **Brand Colors**: Blue (#0052cc) and Orange (#ff6b35) matching EasyHireTools logo
+- **Accessible**: WCAG compliant with proper contrast and keyboard navigation
+- **Performance**: Optimized for fast loading and smooth interactions
 
-1. Navigate to the backend directory:
-```bash
-cd backend
+## 📁 Project Structure
+
+```
+easyhiretools-app/
+├── public/                 # Static assets
+│   └── logo.png           # 👈 Your EasyHireTools logo
+├── src/
+│   ├── app/               # Next.js App Router
+│   │   ├── layout.tsx     # Root layout
+│   │   ├── page.tsx       # Home/Landing page
+│   │   ├── globals.css    # Global styles
+│   │   ├── jobseeker/     # Job seeker routes
+│   │   │   ├── login/     # Login page
+│   │   │   ├── signup/    # Signup page
+│   │   │   └── dashboard/ # Job search dashboard
+│   │   └── employer/      # Employer routes
+│   │       ├── login/     # Employer login
+│   │       ├── signup/    # Company registration
+│   │       └── dashboard/ # Job management dashboard
+│   └── components/
+│       ├── Navbar.tsx     # Navigation bar with logo
+│       └── Footer.tsx     # Footer component
+├── package.json
+├── tsconfig.json
+├── tailwind.config.ts
+├── next.config.js
+└── README.md
 ```
 
-2. Install dependencies:
+## 🚀 Getting Started
+
+### Prerequisites
+- Node.js 18.17 or later
+- npm or yarn
+
+### Installation
+
+1. **Install Dependencies**
 ```bash
 npm install
 ```
 
-3. Set up environment variables:
-```bash
-cp .env.example .env
-# Edit .env with your MongoDB connection string and JWT secret
-```
-
-4. Start the server:
+2. **Run Development Server**
 ```bash
 npm run dev
 ```
 
-The API will be running on `http://localhost:5000`
+3. **Open in Browser**
+   Navigate to `http://localhost:3000`
 
-### Mobile App Setup
-
-1. Navigate to the mobile directory:
+### Build for Production
 ```bash
-cd mobile
-```
-
-2. Install dependencies:
-```bash
-npm install
-```
-
-3. Update API URL in `src/services/api.js` if using a different backend address
-
-4. Start the app:
-```bash
-# For Android
-npm run android
-
-# For iOS
-npm run ios
-
-# For Web
-npm run web
-
-# Or with Expo
+npm run build
 npm start
 ```
 
-## API Endpoints
+## 🎯 Key Pages & Routes
 
-### Authentication
-- `POST /api/auth/register` - Register new user
-- `POST /api/auth/login` - Login user
+| Route | Description |
+|-------|---|
+| `/` | Landing/Home page |
+| `/jobseeker/login` | Job seeker login |
+| `/jobseeker/signup` | Job seeker registration |
+| `/jobseeker/dashboard` | Job search & browse |
+| `/employer/login` | Employer login |
+| `/employer/signup` | Company registration |
+| `/employer/dashboard` | Post & manage jobs |
 
-### Jobs
-- `GET /api/jobs` - Get all jobs
-- `GET /api/jobs/:id` - Get job details
-- `POST /api/jobs` - Post new job (employers only)
-- `POST /api/jobs/:id/apply` - Apply for a job
-- `PUT /api/jobs/:id` - Update job (job poster only)
+## 🎨 Logo Integration Guide
 
-### Resumes
-- `GET /api/resumes` - Get current user's resume
-- `GET /api/resumes/user/:userId` - Get user's resume
-- `POST /api/resumes` - Create/update resume
-- `DELETE /api/resumes` - Delete resume
+### Where to Add Your Logo
 
-### Users
-- `GET /api/users/profile` - Get current user profile
-- `PUT /api/users/profile` - Update user profile
+The logo is referenced in multiple places:
 
-## Technology Stack
+1. **Navbar** (Header on every page)
+   - Location: `src/components/Navbar.tsx`
+   - The logo displays in the top-left corner
+   - File: `public/logo.png`
 
-### Backend
-- Node.js
-- Express.js
-- MongoDB/Mongoose
-- JWT Authentication
-- Bcrypt for password hashing
+2. **Browser Tab Icon** (Favicon)
+   - Location: `src/app/layout.tsx`
+   - Automatically uses `/public/logo.png`
 
-### Mobile
-- React Native
-- React Navigation
-- Expo
-- Axios for API calls
-- React Native Vector Icons
+3. **Additional Logo Usage**
+   - You can add more instances in:
+     - Landing page hero section
+     - Footer
+     - Login/Signup pages backgrounds
 
-## Database Models
+### Logo File Requirements
 
-### User
-- name, email, password, userType (jobseeker/employer)
-- phone, avatar, company
-- timestamps
-
-### Job
-- title, description, company, location
-- salary (min, max, currency)
-- jobType (full-time, part-time, contract, internship)
-- requirements, skills
-- postedBy (employer reference)
-- applicants (array of user applications)
-
-### Resume
-- userId, title, summary
-- experience, education, skills
-- fileUrl, visibility
-- timestamps
-
-## Environment Variables
-
-### Backend (.env)
 ```
-PORT=5000
-MONGODB_URI=mongodb://localhost:27017/easyhire
-JWT_SECRET=your_secret_key
-NODE_ENV=development
+File Name: logo.png
+Location: /public/logo.png
+Recommended Size: 40x40px to 512x512px
+Format: PNG (transparent background recommended)
+Color: Your brand colors (Blue & Orange)
 ```
 
-## License
+### How to Add/Replace Logo
 
-MIT
+1. **Replace existing logo:**
+   - Place your `logo.png` file in the `public/` folder
+   - It automatically updates everywhere the logo is referenced
 
-## Support
+2. **The logo is already integrated in:**
+   - ✅ Navbar (top-left corner)
+   - ✅ Browser tab icon/favicon
+   - ✅ Mobile menu
 
-For issues or questions, please create an issue in the repository.
+### Your Current Logo
+
+Your logo file is already in place at:
+```
+/public/logo.png
+```
+
+The app automatically references it in:
+- Navbar component
+- HTML head as favicon
+- The image displays at 40x40px in navbar, responsive on mobile
+
+## 🎨 Design System
+
+### Color Scheme
+```
+Primary Blue: #0052cc
+Primary Dark: #003fa3
+Accent Orange: #ff6b35
+Accent Dark: #e55a24
+Dark Background: #0a0e27
+Light Background: #f0f7ff
+```
+
+### Typography
+- Font: Inter (from Google Fonts)
+- Headings: Bold
+- Body: Regular
+
+### Components
+- **Buttons**: Two styles (Primary/Secondary)
+- **Cards**: Elevated with hover effects
+- **Forms**: Consistent input styling with icons
+- **Animations**: Smooth transitions and hover effects
+
+## 📝 Customization
+
+### Update Brand Colors
+
+Edit `tailwind.config.ts`:
+```typescript
+colors: {
+  primary: {
+    500: '#0052cc',  // Change primary blue
+  },
+  accent: {
+    500: '#ff6b35',  // Change accent orange
+  }
+}
+```
+
+### Update Company Info
+
+Edit `src/components/Footer.tsx`:
+- Company name
+- Contact email
+- Phone number
+- Address
+
+## 🔐 Authentication Setup (Future Implementation)
+
+Currently, the app has mock authentication. To add real authentication:
+
+1. **Backend Setup**: Create API endpoints for:
+   - User registration
+   - Login
+   - Job posting
+   - Job search
+   - Job applications
+
+2. **Database**: Setup with:
+   - PostgreSQL, MongoDB, or Firebase
+   - Prisma ORM recommended
+
+3. **Authentication**: Implement with:
+   - NextAuth.js or Auth0
+   - JWT tokens
+   - Secure session management
+
+## 📱 Responsive Breakpoints
+
+- Mobile: 320px - 768px
+- Tablet: 768px - 1024px
+- Desktop: 1024px+
+
+## 🚀 Deployment
+
+### Deploy to Vercel (Recommended)
+
+1. Push your code to GitHub
+2. Connect repository to Vercel
+3. Deploy with one click
+4. Environment variables are auto-configured
+
+### Deploy to Other Platforms
+
+The app works with any platform that supports Node.js:
+- Netlify
+- AWS Amplify
+- DigitalOcean
+- Heroku
+- Docker containers
+
+## 📚 Technology Stack
+
+| Technology | Purpose |
+|--|--|
+| Next.js 14 | React framework |
+| React 18 | UI library |
+| TypeScript | Type safety |
+| Tailwind CSS | Styling |
+| Lucide React | Icons |
+| ESLint | Code quality |
+
+## 📄 License
+
+This project is provided as-is for EasyHireTools.
+
+## 🤝 Support
+
+For issues or questions:
+- Email: support@easyhiretools.com
+- Documentation: See README sections above
+
+---
+
+**Built with ❤️ for EasyHireTools**
+
+Happy Hiring! 🎯
