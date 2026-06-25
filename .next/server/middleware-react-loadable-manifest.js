@@ -1,1 +1,1 @@
-self.__REACT_LOADABLE_MANIFEST="{}";
+self.__REACT_LOADABLE_MANIFEST='{"app/jobseeker/tools/resume-builder/page.tsx -> docx":{"id":432,"files":["static/chunks/8187f03c.b5dae1b2d5b1100f.js","static/chunks/434.c81092b11c9130b1.js"]},"app/jobseeker/tools/resume-builder/page.tsx -> file-saver":{"id":12,"files":["static/chunks/12.89578504426a4de2.js"]}}';

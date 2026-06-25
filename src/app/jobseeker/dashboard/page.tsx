@@ -1,7 +1,8 @@
 'use client'
 
 import { useState } from 'react'
-import { Search, MapPin, DollarSign, Briefcase, Clock } from 'lucide-react'
+import Link from 'next/link'
+import { Search, MapPin, DollarSign, Briefcase, Clock, Sparkles, FileText, ArrowRight } from 'lucide-react'
 
 const SAMPLE_JOBS = [
   {
@@ -69,6 +70,29 @@ export default function JobSearch() {
         <div className="text-center mb-12">
           <h1 className="text-4xl font-bold text-gray-900 mb-3">Find Your Perfect Job</h1>
           <p className="text-gray-600 text-lg">Browse thousands of opportunities from top companies</p>
+        </div>
+
+        {/* AI Tools Banner */}
+        <div className="mb-8 grid grid-cols-1 md:grid-cols-1 gap-4">
+          <Link
+            href="/jobseeker/tools/resume-builder"
+            className="group flex items-center justify-between bg-gradient-to-r from-primary-500 to-primary-600 rounded-xl p-5 shadow-lg hover:from-primary-600 hover:to-primary-700 transition-all"
+          >
+            <div className="flex items-center gap-4">
+              <div className="w-12 h-12 bg-white/20 rounded-xl flex items-center justify-center">
+                <Sparkles className="w-6 h-6 text-white" />
+              </div>
+              <div>
+                <h3 className="text-white font-bold text-lg">Candidate Avatar Tool</h3>
+                <p className="text-primary-100 text-sm">Fill your details &amp; generate a professional resume — download as Word (.docx)</p>
+              </div>
+            </div>
+            <div className="flex items-center gap-2 bg-white/20 rounded-lg px-4 py-2 text-white font-semibold text-sm group-hover:bg-white/30 transition">
+              <FileText className="w-4 h-4" />
+              Build Resume
+              <ArrowRight className="w-4 h-4" />
+            </div>
+          </Link>
         </div>
 
         {/* Search Bar */}
