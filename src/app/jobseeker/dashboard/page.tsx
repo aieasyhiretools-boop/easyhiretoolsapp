@@ -65,6 +65,9 @@ export default function JobSearch() {
     setApprovalStatus((fresh?.status ?? session.status) as any)
   }, [])
 
+  // Show nothing during SSR hydration flash
+  if (approvalStatus === 'loading') return null
+
   const filteredJobs = SAMPLE_JOBS.filter((job) => {
     const matchesSearch = job.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
       job.company.toLowerCase().includes(searchTerm.toLowerCase())

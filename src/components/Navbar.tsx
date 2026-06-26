@@ -26,15 +26,15 @@ export default function Navbar() {
             <Link href="/" className="text-gray-700 hover:text-primary-600 font-semibold transition">
               Home
             </Link>
-            <a href="#" className="text-gray-700 hover:text-primary-600 font-semibold transition">
+            <Link href="/browse-jobs" className="text-gray-700 hover:text-primary-600 font-semibold transition">
               Browse Jobs
-            </a>
-            <a href="#" className="text-gray-700 hover:text-primary-600 font-semibold transition">
+            </Link>
+            <Link href="/for-employers" className="text-gray-700 hover:text-primary-600 font-semibold transition">
               For Employers
-            </a>
-            <a href="#" className="text-gray-700 hover:text-primary-600 font-semibold transition">
+            </Link>
+            <Link href="/about" className="text-gray-700 hover:text-primary-600 font-semibold transition">
               About
-            </a>
+            </Link>
           </div>
 
           {/* Auth Buttons */}
@@ -74,15 +74,15 @@ export default function Navbar() {
             >
               Home
             </Link>
-            <a href="#" className="block text-gray-700 hover:text-primary-600 font-semibold py-2">
+            <Link href="/browse-jobs" className="block text-gray-700 hover:text-primary-600 font-semibold py-2" onClick={() => setIsOpen(false)}>
               Browse Jobs
-            </a>
-            <a href="#" className="block text-gray-700 hover:text-primary-600 font-semibold py-2">
+            </Link>
+            <Link href="/for-employers" className="block text-gray-700 hover:text-primary-600 font-semibold py-2" onClick={() => setIsOpen(false)}>
               For Employers
-            </a>
-            <a href="#" className="block text-gray-700 hover:text-primary-600 font-semibold py-2">
+            </Link>
+            <Link href="/about" className="block text-gray-700 hover:text-primary-600 font-semibold py-2" onClick={() => setIsOpen(false)}>
               About
-            </a>
+            </Link>
             <div className="pt-2 flex flex-col gap-2">
               <Link href="/jobseeker/login" className="btn-primary text-center py-2">
                 Job Seeker Login

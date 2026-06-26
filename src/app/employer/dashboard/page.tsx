@@ -65,6 +65,8 @@ export default function EmployerDashboard() {
     setApprovalStatus((fresh?.status ?? session.status) as any)
   }, [])
 
+  if (approvalStatus === 'loading') return null
+
   const handleInputChange = (
     e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
   ) => {

@@ -12,32 +12,17 @@
       "static/chunks/fd9d1056-cf48984c1108c87a.js",
       "static/chunks/117-1e0683bc7f4a88b0.js",
       "static/chunks/main-app-a692e37061392f40.js",
-      "static/css/731a9c227d199267.css",
-      "static/chunks/451-0b544f5a931b711b.js",
-      "static/chunks/app/layout-c19e2a05f980cc08.js"
-    ],
-    "/employer/dashboard/page": [
-      "static/chunks/webpack-167fc1457d4befe5.js",
-      "static/chunks/fd9d1056-cf48984c1108c87a.js",
-      "static/chunks/117-1e0683bc7f4a88b0.js",
-      "static/chunks/main-app-a692e37061392f40.js",
-      "static/chunks/app/employer/dashboard/page-390271e5af664fda.js"
+      "static/css/70bc386722a5f8ec.css",
+      "static/chunks/972-3b1319f148240e44.js",
+      "static/chunks/app/layout-40833385b244ef59.js"
     ],
     "/employer/login/page": [
       "static/chunks/webpack-167fc1457d4befe5.js",
       "static/chunks/fd9d1056-cf48984c1108c87a.js",
       "static/chunks/117-1e0683bc7f4a88b0.js",
       "static/chunks/main-app-a692e37061392f40.js",
-      "static/chunks/451-0b544f5a931b711b.js",
-      "static/chunks/app/employer/login/page-e6fcc148afcbaf66.js"
-    ],
-    "/jobseeker/login/page": [
-      "static/chunks/webpack-167fc1457d4befe5.js",
-      "static/chunks/fd9d1056-cf48984c1108c87a.js",
-      "static/chunks/117-1e0683bc7f4a88b0.js",
-      "static/chunks/main-app-a692e37061392f40.js",
-      "static/chunks/451-0b544f5a931b711b.js",
-      "static/chunks/app/jobseeker/login/page-2ae09106a6dc4664.js"
+      "static/chunks/972-3b1319f148240e44.js",
+      "static/chunks/app/employer/login/page-daad509f996a414f.js"
     ],
     "/admin/dashboard/page": [
       "static/chunks/webpack-167fc1457d4befe5.js",
@@ -46,30 +31,6 @@
       "static/chunks/main-app-a692e37061392f40.js",
       "static/chunks/app/admin/dashboard/page-6e827bfa967e4305.js"
     ],
-    "/jobseeker/signup/page": [
-      "static/chunks/webpack-167fc1457d4befe5.js",
-      "static/chunks/fd9d1056-cf48984c1108c87a.js",
-      "static/chunks/117-1e0683bc7f4a88b0.js",
-      "static/chunks/main-app-a692e37061392f40.js",
-      "static/chunks/451-0b544f5a931b711b.js",
-      "static/chunks/app/jobseeker/signup/page-7378fbcb93687b1b.js"
-    ],
-    "/employer/signup/page": [
-      "static/chunks/webpack-167fc1457d4befe5.js",
-      "static/chunks/fd9d1056-cf48984c1108c87a.js",
-      "static/chunks/117-1e0683bc7f4a88b0.js",
-      "static/chunks/main-app-a692e37061392f40.js",
-      "static/chunks/451-0b544f5a931b711b.js",
-      "static/chunks/app/employer/signup/page-0fd179c050bd4dc0.js"
-    ],
-    "/jobseeker/dashboard/page": [
-      "static/chunks/webpack-167fc1457d4befe5.js",
-      "static/chunks/fd9d1056-cf48984c1108c87a.js",
-      "static/chunks/117-1e0683bc7f4a88b0.js",
-      "static/chunks/main-app-a692e37061392f40.js",
-      "static/chunks/451-0b544f5a931b711b.js",
-      "static/chunks/app/jobseeker/dashboard/page-835ff5fd4f27871c.js"
-    ],
     "/admin/login/page": [
       "static/chunks/webpack-167fc1457d4befe5.js",
       "static/chunks/fd9d1056-cf48984c1108c87a.js",
@@ -77,21 +38,84 @@
       "static/chunks/main-app-a692e37061392f40.js",
       "static/chunks/app/admin/login/page-4590793879c54256.js"
     ],
+    "/employer/signup/page": [
+      "static/chunks/webpack-167fc1457d4befe5.js",
+      "static/chunks/fd9d1056-cf48984c1108c87a.js",
+      "static/chunks/117-1e0683bc7f4a88b0.js",
+      "static/chunks/main-app-a692e37061392f40.js",
+      "static/chunks/972-3b1319f148240e44.js",
+      "static/chunks/app/employer/signup/page-7530e8c17440f5df.js"
+    ],
+    "/browse-jobs/page": [
+      "static/chunks/webpack-167fc1457d4befe5.js",
+      "static/chunks/fd9d1056-cf48984c1108c87a.js",
+      "static/chunks/117-1e0683bc7f4a88b0.js",
+      "static/chunks/main-app-a692e37061392f40.js",
+      "static/chunks/972-3b1319f148240e44.js",
+      "static/chunks/app/browse-jobs/page-db9979f25516a8d8.js"
+    ],
+    "/employer/dashboard/page": [
+      "static/chunks/webpack-167fc1457d4befe5.js",
+      "static/chunks/fd9d1056-cf48984c1108c87a.js",
+      "static/chunks/117-1e0683bc7f4a88b0.js",
+      "static/chunks/main-app-a692e37061392f40.js",
+      "static/chunks/app/employer/dashboard/page-2d17359f4b9cdf55.js"
+    ],
+    "/jobseeker/dashboard/page": [
+      "static/chunks/webpack-167fc1457d4befe5.js",
+      "static/chunks/fd9d1056-cf48984c1108c87a.js",
+      "static/chunks/117-1e0683bc7f4a88b0.js",
+      "static/chunks/main-app-a692e37061392f40.js",
+      "static/chunks/972-3b1319f148240e44.js",
+      "static/chunks/app/jobseeker/dashboard/page-7d79dd24371e7cda.js"
+    ],
+    "/jobseeker/login/page": [
+      "static/chunks/webpack-167fc1457d4befe5.js",
+      "static/chunks/fd9d1056-cf48984c1108c87a.js",
+      "static/chunks/117-1e0683bc7f4a88b0.js",
+      "static/chunks/main-app-a692e37061392f40.js",
+      "static/chunks/972-3b1319f148240e44.js",
+      "static/chunks/app/jobseeker/login/page-5e237695bec282c2.js"
+    ],
+    "/for-employers/page": [
+      "static/chunks/webpack-167fc1457d4befe5.js",
+      "static/chunks/fd9d1056-cf48984c1108c87a.js",
+      "static/chunks/117-1e0683bc7f4a88b0.js",
+      "static/chunks/main-app-a692e37061392f40.js",
+      "static/chunks/972-3b1319f148240e44.js",
+      "static/chunks/app/for-employers/page-2e54f209250f6904.js"
+    ],
+    "/jobseeker/signup/page": [
+      "static/chunks/webpack-167fc1457d4befe5.js",
+      "static/chunks/fd9d1056-cf48984c1108c87a.js",
+      "static/chunks/117-1e0683bc7f4a88b0.js",
+      "static/chunks/main-app-a692e37061392f40.js",
+      "static/chunks/972-3b1319f148240e44.js",
+      "static/chunks/app/jobseeker/signup/page-14982f911d0ca1d9.js"
+    ],
     "/jobseeker/tools/resume-builder/page": [
       "static/chunks/webpack-167fc1457d4befe5.js",
       "static/chunks/fd9d1056-cf48984c1108c87a.js",
       "static/chunks/117-1e0683bc7f4a88b0.js",
       "static/chunks/main-app-a692e37061392f40.js",
-      "static/chunks/451-0b544f5a931b711b.js",
-      "static/chunks/app/jobseeker/tools/resume-builder/page-022e33828c9c509e.js"
+      "static/chunks/972-3b1319f148240e44.js",
+      "static/chunks/app/jobseeker/tools/resume-builder/page-0cb534ccb403a418.js"
     ],
     "/page": [
       "static/chunks/webpack-167fc1457d4befe5.js",
       "static/chunks/fd9d1056-cf48984c1108c87a.js",
       "static/chunks/117-1e0683bc7f4a88b0.js",
       "static/chunks/main-app-a692e37061392f40.js",
-      "static/chunks/451-0b544f5a931b711b.js",
-      "static/chunks/app/page-f90fda2886045bbe.js"
+      "static/chunks/972-3b1319f148240e44.js",
+      "static/chunks/app/page-768b9c8a12fbba76.js"
+    ],
+    "/about/page": [
+      "static/chunks/webpack-167fc1457d4befe5.js",
+      "static/chunks/fd9d1056-cf48984c1108c87a.js",
+      "static/chunks/117-1e0683bc7f4a88b0.js",
+      "static/chunks/main-app-a692e37061392f40.js",
+      "static/chunks/972-3b1319f148240e44.js",
+      "static/chunks/app/about/page-3ced177e4df276d9.js"
     ]
   }
 }
